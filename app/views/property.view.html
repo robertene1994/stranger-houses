@@ -1,0 +1,82 @@
+{% extends "main.template.html" %} {% block titulo %} Propiedad {% endblock %} {% block content %}
+<main class="container">
+    <div class="property">
+        {% if property.ownerId == user._id.toString() %}
+        <form action="/property/delete/{{property._id.toString()}}" class="form-ajax" method="GET">
+            <button type="submit" class="bt-remove bt-filled bt-60"><span class="icon fa fa-trash"></span><span class="text">Eliminar anuncio</span></button>
+        </form>
+        {% endif %}
+        <div class="property-contents grid-col-lg-12">
+            <div class="property-top">
+                <div class="property-price">{{property.price}}€{% if property.adType == 'RENTAL' %}/mes{% endif %}</div>
+                <div class="property-address"><span class="icon fa fa-map-marker"></span><span class="text">{{property.address}}</span></div>
+                <div class="property-date">{{property.lastUpdateDate.getDate()+ '/' + (property.lastUpdateDate.getMonth()+1) + '/' + property.lastUpdateDate.getFullYear()}}</div>
+            </div>
+            <ul class="property-details">
+                <li class="active">
+                    <span class="icon fa fa-square-o"></span>
+                    <span class="text">{{property.details.area}}m<sup>2</sup></span>
+                </li>
+                <li class="active">
+                    <span class="icon fa fa-bed"></span>
+                    <span class="text">{{property.details.bedrooms}} habitaciones</span>
+                </li>
+                <li class="active">
+                    <span class="icon fa fa-shower"></span>
+                    <span class="text">{{property.details.bathrooms}} baños</span>
+                </li>
+                <li class="detail {% if property.details.includesParking != true %} disabled {% endif %}" tooltip="Este inmueble {% if property.details.includesParking !== true %} no {% endif %} incluye parking.">
+                    <span class="icon fa fa-car"></span>
+                    <span class="text">Parking</span>
+                </li>
+                <li class="detail {% if property.details.includesFurniture != true %} disabled {% endif %}" tooltip="Este inmueble {% if property.details.includesFurniture !== true' %} no {% endif %} incluye muuebles/electrodomésticos.">
+                    <span class="icon fa fa-television"></span>
+                    <span class="text">Muebles</span>
+                </li>
+                <li class="detail {% if property.details.allowsSmoking != true %} disabled {% endif %}" tooltip="Este inmueble {% if property.details.allowsSmoking !== true %} no {% endif %} permite fumadores.">
+                    <span class="icon fa fa-magic"></span>
+                    <span class="text">Fumadores</span>
+                </li>
+                <li class="detail {% if property.details.allowsPets != true %} disabled {% endif %}" tooltip="Este inmueble {% if property.details.allowsPets !== true %} no {% endif %} permite mascotas.">
+                    <span class="icon fa fa-paw"></span>
+                    <span class="text">Mascotas</span>
+                </li>
+            </ul>
+        </div>
+        <div class="property-images-gallery">
+            {% for img in property.images %}
+            <img src="/{{img}}" /> {% endfor %}
+        </div>
+        <div class="grid">
+            <p class="{% if user && user._id.toString() != property.ownerId %} grid-col-md-6 {% endif %} property-description">
+                {{property.description}}
+            </p>
+            {% if user && user._id.toString() != property.ownerId %}
+            <form class="grid-col-md-6 property-contact form-ajax" action="/property/contact/{{property._id.toString()}}" method="POST">
+                <h2>Contacta con el propietario</h2>
+                <div class="form-line">
+                    <textarea class="input-textarea" name="comment" placeholder="Redacta tu mensaje para el dueño del inmueble."></textarea>
+                </div>
+                <button type="submit" class="bt-filled">Contactar</button>
+            </form>
+            {% endif %}
+        </div>
+        <div class="property-comments">
+            <h2>Comentarios</h2>
+            {% if user %}
+            <form class="grid-col-md-6 property-contact form-ajax" action="/property/addcomment/{{property._id.toString()}}" method="POST">
+                <div class="form-line">
+                    <textarea class="input-textarea" name="comment" placeholder="¿Alguna duda que preguntar? ¿Has tenido malas o buenas experiencias en este inmueble que quieras compartir con la comunidad?"></textarea>
+                </div>
+                <button type="submit" class="bt-filled">Enviar mensaje</button>
+            </form>
+            {% endif %} {% for msg in property.comments %}
+            <div class="property-comment">
+                <a class="property-comment-link" href="#comment-{{loop.index}}" id="comment-{{loop.index}}">#{{loop.index}}</a>
+                <p>{{msg.comment}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %} {% block footer %} {% endblock %}

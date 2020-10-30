@@ -1,0 +1,162 @@
+@import 'util';
+@import 'palette';
+$grid-breakpoints-min: ( sm: 500px, md: 750px, lg: 1000px, xl: 1250px);
+$grid-breakpoints-max: ( xs: 500px, sm: 750px, md: 1000px, lg: 1250px);
+$breakpoints:(xs, sm, md, lg, xl);
+$grid-columns: 12;
+@mixin break-min($size) {
+    @media (min-width: map-get($grid-breakpoints-min, $size)) {
+        @content;
+    }
+}
+
+@mixin break-max($size) {
+    @media (max-width: map-get($grid-breakpoints-max, $size)) {
+        @content;
+    }
+}
+
+.grid {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+@each $key,
+$value in $breakpoints {
+    //Generate grid columns
+    @for $i from 1 through $grid-columns {
+        .grid-col-#{$key}-#{$i} {
+            @if($key=='xs') {
+                flex: 0 0 #{($i / $grid-columns * 100) + '%'};
+            }
+            @else {
+                @include break-min($key) {
+                    flex: 0 0 #{($i / $grid-columns * 100) + '%'};
+                }
+            }
+        }
+    } //Generate hide-show classes
+    .hide-if-#{$key}-or-less {
+        @each $key2,
+        $value2 in $grid-breakpoints-min {
+            @if( map-has-key($grid-breakpoints-max, $key) and map-has-key($grid-breakpoints-max, $key2)) {
+                @if(map-get($grid-breakpoints-max, $key) > map-get($grid-breakpoints-max, $key2)) {
+                    @include break-max($key2) {
+                        display: none !important;
+                        visibility: hidden !important;
+                    }
+                }
+            }
+        }
+    }
+    .show-if-#{$key}-or-less {
+        @each $key2,
+        $value2 in $grid-breakpoints-min {
+            @if( map-has-key($grid-breakpoints-min, $key) and map-has-key($grid-breakpoints-min, $key2)) {
+                @include break-min($key2) {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.center-horizontal-vertical {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    $container-width: 1200px;
+    background: rgb(250, 250, 250);
+    box-shadow: 0 0 5px rgba(5, 5, 5, 0.3);
+    margin: 0 auto;
+    max-width: $container-width;
+    padding: 20px;
+    width: 100%;
+}
+
+//Navbar
+.navbar {
+    $navbar-height: 60px;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), transparent);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row nowrap;
+    line-height: $navbar-height;
+    position: fixed;
+    width: 100%;
+    z-index: 50;
+    &:after {
+        background: linear-gradient(270deg, darken($c-1, 15%), darken($c-2, 15%));
+        content: '';
+        display: block;
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+    }
+    &.navbar-scroll:after {
+        opacity: 1;
+        transition: 0.25s all ease-in;
+    }
+    &.navbar-no-scroll:after {
+        opacity: 0;
+        transition: 0.25s all ease-out;
+    }
+    >.navbar-left {
+        align-self: flex-start;
+        display: flex;
+    }
+    >.navbar-right {
+        align-self: flex-end;
+        display: flex;
+    }
+    .brand {
+        height: 100%;
+        max-height: $navbar-height;
+        padding: 6px 15px;
+        >img {
+            max-height: $navbar-height - 10px;
+            mix-blend-mode: hard-light;
+        }
+    }
+    ul {
+        @extend %clearfix;
+        list-style: none;
+        >li {
+            float: left;
+            margin: 0 15px;
+        }
+        margin-right: 15px;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    ul.links {
+        $link-height: 40px;
+        >li {
+            border-radius: #{$link-height/2};
+            margin: #{($navbar-height - $link-height)/2} 10px;
+            height: $link-height;
+            line-height: $link-height;
+            text-transform: uppercase;
+            @include transition;
+            &.active,
+            &:hover {
+                background: $c-1;
+            }
+            >a {
+                color: $c-light;
+                font-size: #{$link-height*0.4};
+                font-weight: 400;
+                padding: 0 13px;
+                text-decoration: none;
+            }
+        }
+    }
+}

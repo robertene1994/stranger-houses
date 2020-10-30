@@ -1,0 +1,22 @@
+{% set active = 'anuncios' %} {% extends "main.template.html" %} {% block titulo %} Mis anuncios de propiedades {% endblock %} {% block header %}
+<header class="small-header center-horizontal-vertical">
+    <div class="bg">
+        <div class="tint-gradient"></div>
+        <img src="/img/home-image.jpg" alt="Stranger Houses" />
+    </div>
+    <form action="/property/ads" method="GET"
+        class="grid-col-xl-7 grid-col-lg-10 grid-col-md-11 grid-col-sm-12 grid-col-xs-12">
+        {% include "./snippets/search-properties.snippet.html" %}
+    </form>
+</header>
+{% endblock %} {% block content %}
+<main class="container">
+    <h1>Anuncios de propiedades</h1>
+    {% include "./snippets/ads.snippet.html" %}
+    <ul class="pagination">
+        {% for page in pages %}
+        <li {% if page==actual %} class="active" {% endif %}><a href="/property/ads?page={{page}}">{{page}}</a></li>
+        {% endfor %}
+    </ul>
+</main>
+{% endblock %}

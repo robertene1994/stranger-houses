@@ -1,0 +1,46 @@
+{% extends "main.template.html" %} {% block titulo %} Mis anuncios de propiedades {% endblock %} {% block content %}
+<main class="container">
+    <h1>Mi perfil</h1>
+    <form method="POST" action="/user/update/{{user._id.toString()}}" class="form-ajax">
+        <label class="form-line">
+            <span class="text" tooltip="Introduce tu nombre">Nombre*:</span>
+            <input type="text" id="sign-up-form-name" class="input-text"  name="firstName" placeholder="Nombre" value="{{user.firstName}}" required data-validations='{"required": true}'/>
+        </label>
+        <label class="form-line">
+            <span class="text" tooltip="Introduce tu nombre">Apellidos*:</span>
+            <input type="text" class="input-text"  name="lastName" placeholder="Apellidos" required value="{{user.lastName}}" data-validations='{"required": true}'/>
+        </label>
+        <div class="form-line">
+            <span class="text" tooltip="Introduce tu nombre">Género*:</span>
+            <div class="choose-icon-group">
+                <label class="choose-icon">
+                    <input type="radio" name="gender" value="MALE" required data-validations='{"required": true}' {% if user.gender=='MALE' %} checked {% endif %}/>
+                    <span class="icon fa fa-mars" aria-hidden="true"></span>
+                    <span class="text">Hombre</span>
+                </label>
+                <label class="choose-icon">
+                    <input type="radio" name="gender" value="FEMALE" required data-validations='{"required": true}' {% if user.gender=='FEMALE' %} checked {% endif %}/>
+                    <span class="icon fa fa-venus" aria-hidden="true"></span>
+                    <span class="text">Mujer</span>
+                </label>
+            </div>
+        </div>
+        <label class="form-line">
+            <span class="text" >E-mail*:</span>
+            <input type="email" class="input-text"  name="email" placeholder="E-mail" required value="{{user.email}}" data-validations='{"required": true, "email": true}'/>
+        </label>
+        <label class="form-line">
+            <span class="text" >Contraseña*:</span>
+            <input type="password" id="update-password" class="input-text"  name="password" placeholder="Contraseña" required data-validations='{"required": true, "minlength": 4}'/>
+        </label>
+        <label class="form-line">
+            <span class="text">Repita la contraseña*:</span>
+            <input type="password" class="input-text"  name="password-confirmation" placeholder="Confirma la contraseña" required data-validations='{"required": true, "minlength": 4, "equalTo": "#update-password"}'/>
+        </label>
+        <button class="bt-filled bt-icon-hover" type="submit">
+            <span class="text">Actualizar perfil</span>
+            <span class="icon fa fa-arrow-right"></span>
+        </button>
+    </form>
+</main>
+{% endblock %} {% block footer %} {% endblock %}

@@ -1,0 +1,129 @@
+{% set active = 'nuevo-anuncio' %} {% extends "main.template.html" %} {% block titulo %} Inicio {% endblock %} {% block content %}
+<div class="container">
+    <form id="new-property-form" class="steps-form dropzone" action="/property/save" method="POST" enctype="multipart/form-data">
+        <div class="form-section">
+            <h2>Precio y tipo de inmueble</h2>
+            <label class="form-line">
+                <span class="text">Precio (€):</span>
+                <input class="input-text" type="input-text" name="price" data-validations='{"required": true, "min": 1}'/>
+            </label>
+            <div class="form-line">
+                <span class="text">Tipo de inmueble:</span>
+                <div class="choose-icon-group">
+                    <label class="choose-icon">
+                        <input type="radio" name="propertyType" value="HOUSE" data-validations='{"required": true}'/>
+                        <span class="icon fa fa-home" aria-hidden="true" tooltip="Casa"></span>
+                        <span class="text">Casa</span>
+                    </label>
+                    <label class="choose-icon">
+                        <input type="radio" name="propertyType" value="FLAT" data-validations='{"required": true}'/>
+                        <span class="icon fa fa-building" aria-hidden="true" tooltip="Piso" ></span>
+                        <span class="text">Piso</span>
+                    </label>
+                    <label class="choose-icon">
+                        <input type="radio" name="propertyType" value="OFFICE" data-validations='{"required": true}'/>
+                        <span class="icon fa fa-briefcase" aria-hidden="true" tooltip="Oficina"></span>
+                        <span class="text">Oficina</span>
+                    </label>
+                </div>
+                <label for="propertyType" class="error" style="display:none;"></label>
+            </div>
+            <div class="form-line">
+                <span class="text">¿Que quieres hacer con él?:</span>
+                <div class="choose-icon-group">
+                    <label class="choose-icon">
+                        <input type="radio" name="adType" value="RENTAL" data-validations='{"required": true}'/>
+                        <span class="text hide-if-lg-or-less">Alquilar</span>
+                    </label>
+                    <label class="choose-icon">
+                        <input type="radio" name="adType" value="PURCHASE" data-validations='{"required": true}'/>
+                        <span class="text hide-if-lg-or-less">Vender</span>
+                    </label>
+                </div>
+                <label for="adType" class="error" style="display:none;"></label>
+            </div>
+        </div>
+        <div class="form-section">
+            <h2>¿Dónde está?</h2>
+            <label class="form-line">
+                <span class="text">País:</span>
+                <input class="input-text" type="text" name="country" data-validations='{"required": true}'/>
+            </label>
+            <label class="form-line">
+                <span class="text">Provincia:</span>
+                <input class="input-text" type="text" name="state" data-validations='{"required": true}'/>
+            </label>
+            <label class="form-line">
+                <span class="text">Ciudad:</span>
+                <input class="input-text" type="text" name="city" data-validations='{"required": true}'/>
+            </label>
+            <label class="form-line">
+                <span class="text">Código postal:</span>
+                <input class="input-text" type="text" name="zipcode" data-validations='{"required": true}'/>
+            </label>
+            <label class="form-line">
+                <span class="text">Dirección:</span>
+                <input class="input-text" type="text" name="address" data-validations='{"required": true}'/>
+            </label>
+        </div>
+        <div class="form-section">
+            <h2>Cuéntanos sobre tu propiedad</h2>
+            <label class="form-line">
+                <span class="text">¿Qué tamaño tiene (m<sup>2</sup>)?</span>
+                <input class="input-text" type="number" name="area" min="0" data-validations='{"required": true, "min": 1}'/>
+            </label>
+            <label class="form-line">
+                <span class="text">¿Cuántas habitaciones tiene?</span>
+                <input class="input-text" type="number" name="bedrooms" min="0" data-validations='{"required": true, "min": 0}'/>
+            </label>
+            <label class="form-line">
+                <span class="text">¿Cuántos baños tiene?</span>
+                <input class="input-text" type="number" name="bathrooms" min="0" data-validations='{"required": true, "min": 0}'/>
+            </label>
+            <label class="form-line">
+                <div class="checkbox">
+                    <input class="input-check" type="checkbox" name="includesParking" />
+                    <span class="icon fa fa-car"></span>
+                    <span class="text">¿Tiene parking privado?</span>
+                </div>
+            </label>
+            <label class="form-line">
+                <div class="checkbox">
+                    <input class="input-check" type="checkbox" name="includesFurniture"/>
+                    <span class="icon fa fa-television"></span>
+                    <span class="text">¿Incluye los muebles y electrodomésticos?</span>
+                </div>
+            </label>
+            <label class="form-line">
+                <div class="checkbox">
+                    <input class="input-check" type="checkbox" name="allowsSmoking" />
+                    <span class="icon fa fa-magic"></span>
+                    <span class="text">¿Permite fumar?</span>
+                </div>
+            </label>
+            <label class="form-line">
+                <div class="checkbox">
+                    <input class="input-check" type="checkbox" name="allowsPets" />
+                    <span class="icon fa fa-paw"></span>
+                    <span class="text">¿Permite mascotas?</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-section">
+            <h2>Cuéntanos más sobre el inmueble y añade unas fotos vistosas.</h2>
+            <div class="form-line">
+                <textarea class="input-textarea" name="description" placeholder="¿Cuándo se construyó? ¿Por qué la vendes? ¿Ha sido reformada recientemente?" data-validations='{"required": true}'></textarea>
+            </div>
+            <input type="file" name="images" style="opacity:0;" />
+            <div class="dz-default"></div>
+            <div id="dropzone-preview" class="dropzone-previews"></div>
+            <button class="bt-filled bt-60" type="submit">Crear anuncio</button>
+        </div>
+    </form>
+</div>
+<!-- Block principal -->
+{% endblock %} {% block footer %}
+<!-- Block footer -->
+{% endblock %} {% block scripts %}
+<script src="/js/new-property.js"></script>
+{% endblock %}

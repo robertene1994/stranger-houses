@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block titulo %} Inmobiliaria {% endblock %}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <dialog class="growl {{message.severity}}">
+        <span class="closer fa fa-times-circle"></span> {{message.text}}
+    </dialog>
+    {% if !user %} {% include "./snippets/sign-modal.snippet.html" %} {% endif %}
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="/" class="brand">
+                <img src="/img/logo-256.png" alt="Strange Houses Logo"/>
+            </a>
+        </div>
+        <div class="navbar-center">
+        </div>
+        <div class="navbar-right">
+            <ul class="links">
+                <li {% if active=='inicio' %} class="active" {% endif %}><a href="/">Inicio</a></li>
+                <li {% if active=='anuncios' %} class="active" {% endif %}><a href="/property/ads">Anuncios</a></li>
+                {% if user %}
+                <li {% if active=='nuevo-anuncio' %} class="active" {% endif %}><a href="/property/add">Crear anuncios</a></li>
+                <li {% if active=='mis-anuncios' %} class="active" {% endif %}><a href="/property/myads">Mis anuncios</a></li>
+                {% endif %}
+            </ul>
+            <ul>
+                {% if user %}
+                <li><a class="bt" href="/user/userprofile">Mi perfil</a></li>
+                <li>
+                    <form action="/user/logout" method="GET" class="form-ajax"><button class="bt-filled">Cerrar sesión</button></form>
+                </li>
+                {% else %}
+                <li><button class="bt modal-trigger" data-modal="#modal-sign-in" data-modal-focus="#sign-in-form-email">Iniciar sesión</button></li>
+                <li><button class="bt-filled modal-trigger" data-modal="#modal-sign-up" data-modal-focus="#sign-up-form-name">Crear cuenta</button></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    {% block header %}
+    <header class="no-header"></header>
+    {% endblock %} {% block content %}
+    <!-- Content -->
+    {% endblock %} {% block footer %}
+    <!-- Content -->
+    {% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+    <script src="/js/jquery.nice-select.min.js"></script>
+    <script src="/js/dropzone.js"></script>
+    <script src="/js/validation.js"></script>
+    <script src="/js/form-stepper.js"></script>
+    <script src="/js/main.js"></script>
+    {% block scripts %}
+    <!-- Content -->
+    {% endblock %}
+</body>
+
+</html>
