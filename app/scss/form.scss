@@ -86,6 +86,9 @@
         text-align: center;
         @include transition;
     }
+    >.text {
+
+    }
 }
 .choose-icon-group {
     @extend %clearfix;
