@@ -345,7 +345,7 @@ form>.search {
             margin-bottom: 25px;
             >.property-price,
             >.property-date,
-            > {
+            {
                 border-radius: 20px;
                 color: $c-light;
                 height: 40px;
@@ -419,6 +419,8 @@ form>.search {
     }
     >.grid {
         margin-bottom: 25px;
+        >.property-description {}
+        >.property-contact {}
     }
     >.property-comments {
         border-top: solid 1px $c-grey;
