@@ -6,9 +6,7 @@
     "description": "Website for renting and selling properties.",
     "main": "app/app.js",
     "scripts": {
-        "prestart": "npm run sass-build",
         "start": "node app/app.js",
-        "prestart:dev": "npm run sass-build",
         "start:dev": "concurrently --kill-others \"npm run nodemon\" \"npm run sass\"",
         "nodemon": "nodemon app/app.js --ignore 'app/scss'",
         "sass-build": "node-sass app/scss/style.scss -o app/public/css --output-style compressed",
