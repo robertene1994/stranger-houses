@@ -1,0 +1,55 @@
+{
+    "model": {
+        "user": {
+            "id": 1,
+            "email": "user@domain.com",
+            "password": "password",
+            "firstName": "FirstName",
+            "lastName": "LastName",
+            "gender": "FEMALE"
+        },
+        "property": {
+            "id": 1,
+            "ownerId": 1,
+            "price": 125,
+            "adType": "RENTAL",
+            "propertyType": "FLAT",
+            "details": {
+                "area": 200,
+                "bedrooms": 3,
+                "bathrooms": 2,
+                "includesParking": true,
+                "includesFurniture": false,
+                "allowsSmoking": false,
+                "allowsPets": true
+            },
+            "address": "C/Lago Ubales nº5, 33950, Sotrondio, Asturias, España",
+            "description": "Property description",
+            "images": [
+                "ads/id/img1.jpg",
+                "ads/id/img2.jpg",
+                "ads/id/img3.jpg"
+            ],
+            "publishDate": "1990-10-20T20:45:00+02:00",
+            "lastUpdateDate": "1990-10-20T20:45:00+02:00",
+            "comments": [{
+                    "userId": 1,
+                    "comment": "Comment 1"
+                },
+                {
+                    "userId": 2,
+                    "comment": "Comment 2"
+                }
+            ],
+            "likes": 0,
+            "dislikes": 0
+        },
+        "conversation": {
+            "id": 1,
+            "propertyId": 1,
+            "userId": 1,
+            "message": "Text message",
+            "responseTo": 1
+        }
+    }
+}

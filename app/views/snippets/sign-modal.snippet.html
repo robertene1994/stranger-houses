@@ -1,0 +1,68 @@
+<dialog class="modal" id="modal-sign-up">
+    <div class="modal-content">
+        <button class="modal-close fa fa-times"></button>
+        <h1>Crear cuenta</h1>
+        <form action="/user/signin" method="POST" class="form-ajax">
+            <label class="form-line">
+                <span class="text" tooltip="Introduce tu nombre">Nombre*:</span>
+                <input type="text" id="sign-up-form-name" class="input-text"  name="firstName" placeholder="Nombre" required data-validations='{"required": true}'/>
+            </label>
+            <label class="form-line">
+                <span class="text" tooltip="Introduce tu nombre">Apellidos*:</span>
+                <input type="text" class="input-text"  name="lastName" placeholder="Apellidos" required data-validations='{"required": true}'/>
+            </label>
+            <div class="form-line">
+                <span class="text" tooltip="Introduce tu nombre">Género*:</span>
+                <div class="choose-icon-group">
+                    <label class="choose-icon">
+                        <input type="radio" name="gender" value="MALE" required data-validations='{"required": true}'/>
+                        <span class="icon fa fa-mars" aria-hidden="true"></span>
+                        <span class="text">Hombre</span>
+                    </label>
+                    <label class="choose-icon">
+                        <input type="radio" name="gender" value="FEMALE" required data-validations='{"required": true}'/>
+                        <span class="icon fa fa-venus" aria-hidden="true"></span>
+                        <span class="text">Mujer</span>
+                    </label>
+                </div>
+                <label for="gender" class="error" style="display:none;"></label>
+            </div>
+            <label class="form-line">
+                <span class="text" tooltip="Introduce tu nombre">E-mail*:</span>
+                <input type="email" class="input-text"  name="email" placeholder="E-mail" required data-validations='{"required": true, "email": true}'/>
+            </label>
+            <label class="form-line">
+                <span class="text" tooltip="Introduce tu nombre">Contraseña*:</span>
+                <input type="password" id="sign-up-password" class="input-text"  name="password" placeholder="Contraseña" required data-validations='{"required": true, "minlength": 4}'/>
+            </label>
+            <label class="form-line">
+                <span class="text" tooltip="Introduce tu nombre">Repita la contraseña*:</span>
+                <input type="password" class="input-text"  name="password-confirmation" placeholder="Confirma la contraseña" required data-validations='{"required": true, "minlength": 4, "equalTo": "#sign-up-password"}'/>
+            </label>
+            <button class="bt-filled bt-icon-hover" type="submit">
+                <span class="text">Crear cuenta</span>
+                <span class="icon fa fa-arrow-right"></span>
+            </button>
+        </form>
+    </div>
+</dialog>
+<dialog class="modal" id="modal-sign-in">
+    <div class="modal-content">
+        <button class="modal-close fa fa-times"></button>
+        <h1>Iniciar sesión</h1>
+        <form action="/user/login" method="POST" class="form-ajax">
+            <label class="form-line icon-label">
+                <input type="email" id="sign-in-form-email" class="input-text"  name="email" placeholder="E-mail" required/>
+                <span class="icon fa fa-envelope" tooltip="Introduce tu e-mail"></span>
+            </label>
+            <label class="form-line icon-label">
+                <input type="password" class="input-text" name="password" placeholder="Contraseña" required/>
+                <span class="icon fa fa-lock" tooltip="Introduce tu contraseña" minlength="8"></span>
+            </label>
+            <button class="bt-filled bt-icon-hover" type="submit">
+                <span class="text">Entrar</span>
+                <span class="icon fa fa-arrow-right"></span>
+            </button>
+        </form>
+    </div>
+</dialog>

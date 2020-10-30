@@ -1,0 +1,26 @@
+<div class="form-line search">
+    <select class="select" name="adType">
+        <option selected value>Alquilar o comprar</option>
+        <option value="RENTAL">Alquilar</option>
+        <option value="PURCHASE">Comprar</option>
+    </select>
+    <input type="text" class="input-text" name="address" placeholder="¿Dónde?" />
+    <div class="choose-icon-group">
+        <label class="choose-icon">
+            <input type="radio" name="propertyType" value="HOUSE"/>
+            <span class="icon fa fa-home" aria-hidden="true" tooltip="Casa"></span>
+            <span class="text hide-if-lg-or-less">Casa</span>
+        </label>
+        <label class="choose-icon">
+            <input type="radio" name="propertyType" value="FLAT"/>
+            <span class="icon fa fa-building" aria-hidden="true" tooltip="Piso" ></span>
+            <span class="text hide-if-lg-or-less">Piso</span>
+        </label>
+        <label class="choose-icon">
+            <input type="radio" name="propertyType" value="OFFICE"/>
+            <span class="icon fa fa-briefcase" aria-hidden="true" tooltip="Oficina" ></span>
+            <span class="text hide-if-lg-or-less">Oficina</span>
+        </label>
+    </div>
+    <button type="submit" class="bt-filled"><span class="icon fa fa-search"></span></button>
+</div>

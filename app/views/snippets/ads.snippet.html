@@ -1,0 +1,53 @@
+<div class="properties-ads">
+    {% if !properties || properties.length==0 %}
+    <p>No se han encontrado anuncios.</p>
+    {% endif %}
+    {% for property in properties %}
+    <a class="property grid" href="/property/find/{{property._id.toString()}}">
+        <div class="property-image grid-col-lg-3">
+            {% if property.adType == 'RENTAL' %}
+            <div class="ribbon-rental">Alquiler</div>
+            {% elseif property.adType == 'PURCHASE' %}
+            <div class="ribbon-purchase">Compra</div>
+            {% endif %}
+            <img src="/{{property.images[0]}}" />
+        </div>
+        <div class="property-contents grid-col-lg-9">
+            <div class="property-top">
+                <div class="property-price">{{property.price}}€{% if property.adType == 'RENTAL' %}/mes{% endif %}</div>
+                <div class="property-date">{{property.lastUpdateDate.getDate()+ '/' + (property.lastUpdateDate.getMonth()+1) + '/' + property.lastUpdateDate.getFullYear()}}</div>
+            </div>
+            <ul class="property-details">
+                <li class="active">
+                    <span class="icon fa fa-square-o"></span>
+                    <span class="text">{{property.details.area}}m<sup>2</sup></span>
+                </li>
+                <li class="active">
+                    <span class="icon fa fa-bed"></span>
+                    <span class="text">{{property.details.bedrooms}} habitaciones</span>
+                </li>
+                <li class="active">
+                    <span class="icon fa fa-shower"></span>
+                    <span class="text">{{property.details.bathrooms}} baños</span>
+                </li>
+                <li class="detail {% if property.details.includesParking != true %} disabled {% endif %}" tooltip="Este inmueble {% if property.details.includesParking !== true %} no {% endif %} incluye parking.">
+                    <span class="icon fa fa-car"></span>
+                    <span class="text">Parking</span>
+                </li>
+                <li class="detail {% if property.details.includesFurniture != true %} disabled {% endif %}" tooltip="Este inmueble {% if property.details.includesFurniture !== true %} no {% endif %} incluye muuebles/electrodomésticos.">
+                    <span class="icon fa fa-television"></span>
+                    <span class="text">Muebles</span>
+                </li>
+                <li class="detail {% if property.details.allowsSmoking != true %} disabled {% endif %}" tooltip="Este inmueble {% if property.details.allowsSmoking !== true %} no {% endif %} permite fumadores.">
+                    <span class="icon fa fa-magic"></span>
+                    <span class="text">Fumadores</span>
+                </li>
+                <li class="detail {% if property.details.allowsPets != true %} disabled {% endif %}" tooltip="Este inmueble {% if property.details.allowsPets !== true %} no {% endif %} permite mascotas.">
+                    <span class="icon fa fa-paw"></span>
+                    <span class="text">Mascotas</span>
+                </li>
+            </ul>
+        </div>
+    </a>
+    {% endfor %}
+</div>

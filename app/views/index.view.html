@@ -1,0 +1,24 @@
+{% set active = 'inicio' %} {% extends "main.template.html" %} {% block titulo %} Inicio {% endblock %} {% block header %}
+<header id="welcome-header" class="center-horizontal-vertical">
+    <div class="bg">
+        <div class="tint-gradient"></div>
+        <video poster="/img/home-image.jpg" autoplay muted loop>
+            <source src="/vid/home-video.mp4" type="video/mp4">
+        </video>
+    </div>
+    <form action="/property/ads" method="GET" class="grid-col-xl-7 grid-col-lg-10 grid-col-md-11 grid-col-sm-12 grid-col-xs-12">
+        {% include "./snippets/search-properties.snippet.html" %}
+    </form>
+    <div class="separator"></div>
+    {% if user %}
+    <a href="/property/add" class="bt-filled bt-60">Crea tu anuncio</a> {% else %}
+    <button class="bt-filled bt-60 modal-trigger" data-modal="#modal-sign-in" data-modal-focus="#sign-in-form-email">Crea tu anuncio</button> {% endif %}
+</header>
+{% endblock %} {% block content %}
+<!-- Block principal -->
+{% endblock %} {% block footer %}
+<!-- Block footer -->
+{% endblock %} {% block scripts %}
+<script src="js/home.js"></script>
+<!-- Scripts -->
+{% endblock %}
