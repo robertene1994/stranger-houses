@@ -7,7 +7,7 @@
 	<img src="https://forthebadge.com/images/badges/made-with-javascript.svg"/>
 </h4>
 
-### Web application for renting and selling properties built with Node (Express, Swig and MongoDB). It can be accessed at [Drawing](https://stranger-houses.herokuapp.com).
+### Web application for renting and selling properties built with Node (Express, Swig and MongoDB). It can be accessed at [Stranger Houses](https://stranger-houses.herokuapp.com).
 
 #### DevOps (CI/CD) ☁
 
