@@ -1,0 +1,27 @@
+name: DevOps (CD)
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy 🚀
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Deploy to Heroku 🚓
+        uses: akhileshns/heroku-deploy@v3.6.8
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+        env:
+          HD_DB_URI: ${{ secrets.DB_URI }}
+          HD_SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          HD_EMAIL_CONFIG_AUTH_EMAIL: ${{ secrets.EMAIL_CONFIG_AUTH_EMAIL }}
+          HD_EMAIL_CONFIG_AUTH_PASSWORD: ${{ secrets.EMAIL_CONFIG_AUTH_PASSWORD }}
